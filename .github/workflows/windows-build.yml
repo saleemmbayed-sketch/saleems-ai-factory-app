@@ -1,5 +1,5 @@
 # Windows build — produces Saleem's AI Factory NSIS installer for x64
-# on a native windows-latest (x64) runner.
+# on a native windows-latest (x64) runner, then attaches it to the tag release.
 
 name: Windows Build
 
@@ -8,6 +8,9 @@ on:
     tags:
       - "v*"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -20,6 +23,8 @@ jobs:
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
 
       - name: Rust cache
         uses: Swatinem/rust-cache@v2
@@ -35,20 +40,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Build frontend (vite build)
-        run: npm run build
-
-      - name: Check Cargo.toml validity
+      - name: Build x64 NSIS installer
         shell: bash
-        run: head -5 src-tauri/Cargo.toml
-
-      - name: Verify Rust compiles (cargo check)
-        working-directory: src-tauri
-        run: cargo check
-
-      - name: Build Tauri app (+ bundle)
-        shell: bash
-        run: npm run tauri build -- --config '{"bundle":{"createUpdaterArtifacts":false}}'
+        run: npm run tauri build -- --target x86_64-pc-windows-msvc --bundles nsis --config '{"bundle":{"createUpdaterArtifacts":false}}'
         env:
           NODE_ENV: production
 
@@ -56,5 +50,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: saleems-ai-factory-windows
-          path: src-tauri/target/release/bundle/nsis/*-setup.exe
+          path: src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*-setup.exe
           if-no-files-found: error
+
+      - name: Attach installer to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Saleem's AI Factory ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*-setup.exe
