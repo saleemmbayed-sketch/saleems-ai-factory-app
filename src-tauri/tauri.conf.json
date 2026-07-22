@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Saleem's AI Factory",
+  "productName": "Saleems AI Factory",
   "version": "0.3.0",
   "identifier": "com.saleem.saleems-ai-factory-app",
   "build": {
