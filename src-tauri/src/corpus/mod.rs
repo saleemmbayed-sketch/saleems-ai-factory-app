@@ -933,6 +933,18 @@ fn extract_categories(tar_gz: &[u8], dest: &Path, categories: &[String]) -> Resu
             })
             .collect();
 
+        // Persist catalog root metadata so snapshot/tarball-managed catalogs
+        // behave like git clones. Runbooks live under strategy/ and the
+        // division set lives in divisions.json; if these are omitted, the UI
+        // can report a successful catalog update while Runbooks remains locked.
+        if comps.len() == 2 && (comps[1] == DIVISIONS_FILENAME || comps[1] == "tools.json") {
+            let mut buf = Vec::new();
+            if entry.read_to_end(&mut buf).is_ok() {
+                let _ = std::fs::write(dest.join(&comps[1]), &buf);
+            }
+            continue;
+        }
+
         // Persist the tooling so subsequent launches re-derive categories.
         if comps.len() == 3 && comps[1] == "scripts" && comps[2] == "convert.sh" {
             let scripts_dir = dest.join("scripts");
@@ -940,6 +952,29 @@ fn extract_categories(tar_gz: &[u8], dest: &Path, categories: &[String]) -> Resu
             let mut buf = Vec::new();
             if entry.read_to_end(&mut buf).is_ok() {
                 let _ = std::fs::write(scripts_dir.join("convert.sh"), &buf);
+            }
+            continue;
+        }
+
+        // Persist NEXUS runbooks and their docs. `strategy/` is deliberately
+        // not a division, so it is handled explicitly rather than added to the
+        // agent category extraction path.
+        if comps.len() >= 3 && comps[1] == "strategy" {
+            let allowed = (comps.len() == 3 && comps[2] == "runbooks.json")
+                || (comps.len() == 4 && comps[2] == "runbooks" && comps[3].ends_with(".md"));
+            if allowed {
+                let target = if comps.len() == 3 {
+                    dest.join("strategy").join(&comps[2])
+                } else {
+                    dest.join("strategy").join("runbooks").join(&comps[3])
+                };
+                if let Some(parent) = target.parent() {
+                    let _ = std::fs::create_dir_all(parent);
+                }
+                let mut buf = Vec::new();
+                if entry.read_to_end(&mut buf).is_ok() {
+                    let _ = std::fs::write(target, &buf);
+                }
             }
             continue;
         }
