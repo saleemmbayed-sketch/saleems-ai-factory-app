@@ -50,7 +50,7 @@
       "icons/icon.ico"
     ],
     "macOS": {
-      "signingIdentity": "Developer ID Application: Saleem Mo (7JQGQ7CRH8)",
+      "signingIdentity": "REPLACE_WITH_YOUR_APPLE_DEVELOPER_IDENTITY",
       "hardenedRuntime": true,
       "minimumSystemVersion": "13.0",
       "dmg": {

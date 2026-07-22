@@ -18,7 +18,7 @@ It is full source, MIT-licensed, local-first, and does not run telemetry.
 
 ## Why This Exists
 
-The `agency-agents` repo is a useful catalog of specialist AI agent personas, but every coding tool has its own agent format and install path. Claude Code, Codex, Cursor, Gemini CLI, Qwen, opencode, Copilot, and Osaurus all want similar content in slightly different places.
+The Saleem's AI Factory catalog is a useful collection of specialist AI agent personas, but every coding tool has its own agent format and install path. Claude Code, Codex, Cursor, Gemini CLI, Qwen, opencode, Copilot, and Osaurus all want similar content in slightly different places.
 
 Saleem's AI Factory gives that catalog a native control surface:
 
@@ -45,7 +45,7 @@ Saleem's AI Factory is organized around four pillars — **Agents** (who), **Too
 - **Tool registry** — tool knowledge lives in a single upstream-owned `tools.json` shared by the backend and frontend; adding a tool is editing one JSON entry, and installability is derived from whether the app ships a renderer for that tool's format.
 - **Dashboard** — install health, a Global-vs-Projects install sunburst, cross-tool coverage merged with the catalog-by-division view (linked hover), and deep links back into the workspace.
 - **GitHub integration** — optional OAuth Device Flow for GitHub-backed app features. Tokens are stored in the platform keychain and are never returned to the frontend.
-- **Offline-first catalog** — ships with a bundled corpus baseline and can use a local or managed clone of `agency-agents`.
+- **Offline-first catalog** — ships with a bundled corpus baseline and can use a local or managed clone of the Saleem's AI Factory repo.
 - **Cross-platform shell** — Tauri 2 + Svelte 5 frontend with native macOS chrome and opaque native windows on Windows/Linux.
 
 New to directing agents? See **[docs/USING-AGENTS.md](./docs/USING-AGENTS.md)** — the Playbook: how to get shipped, tested work out of the catalog (also in-app via the title-bar book icon).
@@ -65,12 +65,12 @@ The app currently installs to the renderer-backed targets that have deterministi
 | opencode | project | `.opencode/agents/*.md` |
 | Osaurus | user | `~/.osaurus/skills/agency-<slug>/SKILL.md` |
 
-The upstream AA repo also contains integrations for Antigravity, Aider, Windsurf, OpenClaw, and Kimi. Those output shapes need additional app work before they should be exposed as first-class app installs — they appear in the Tools panel as recognized-only.
+The upstream catalog also contains integrations for Antigravity, Aider, Windsurf, OpenClaw, and Kimi. Those output shapes need additional app work before they should be exposed as first-class app installs — they appear in the Tools panel as recognized-only.
 
 ## What This Isn't
 
 - Not an agent runtime. The app installs personas into other tools; it does not execute them.
-- Not a replacement for the `agency-agents` repo. The repo remains the source catalog.
+- Not a replacement for the Saleem's AI Factory catalog. The catalog remains the source of truth.
 - Not a telemetry product. There are no analytics SDKs, user tracking, or accounts required for core use.
 - Not a shell command bridge. The frontend cannot construct arbitrary shell commands.
 
@@ -135,11 +135,11 @@ npm run build:phase-c:full
 
 A Tauri 2 shell hosts a SvelteKit + Svelte 5 frontend in the system WebView. The Rust backend owns the catalog, renderer, install ledger, reconciliation, GitHub integration, settings, and updater boundary.
 
-The catalog comes from `agency-agents`, either as:
+The catalog comes from the `saleems-ai-factory` repo, either as:
 
 - a bundled baseline inside the app
 - a managed local clone at `~/.saleems-ai-factory`
-- a user-selected clone, such as `/Users/saleem/Software/MyProjects/agency-agents`
+- a user-selected clone, such as `/Users/saleem/Projects/saleems-ai-factory`
 
 Rendering is native Rust, deterministic, and tested against the upstream `scripts/convert.sh` outputs for the supported transform tools. The app does not shell out to converter scripts at runtime.
 
@@ -159,7 +159,7 @@ Core browsing and install tracking are local. Network access is explicit and gat
 
 Known outbound paths:
 
-- GitHub/codeload/raw GitHub endpoints for refreshing the `agency-agents` catalog when the user requests or enables it.
+- GitHub/codeload/raw GitHub endpoints for refreshing the Saleem's AI Factory catalog when the user requests or enables it.
 - GitHub OAuth Device Flow when the user chooses to sign in.
 - GitHub API calls for optional GitHub-backed app features.
 - The app updater manifest and release artifacts when update checks are enabled.
@@ -178,7 +178,7 @@ Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 The highest-value areas before 1.0 are:
 
-- verified tool-target manifest shared with the AA repo
+- verified tool-target manifest shared with the catalog repo
 - additional project-scope install targets
 - multi-file renderer support for Aider, Windsurf, OpenClaw, Antigravity, and Kimi once their target formats are verified
 - Windows/Linux packaging validation
@@ -190,7 +190,7 @@ The highest-value areas before 1.0 are:
 
 ## Acknowledgments
 
-- [Saleem's AI Factory](https://github.com/saleemmbayed-sketch/saleems-ai-factory) — the source catalog and upstream converter/install scripts. The app contributes its transforms back upstream: v0.2.0's Osaurus integration and the shared `tools.json` tool manifest (the twin of `divisions.json`) landed there first.
+- [Saleem's AI Factory catalog](https://github.com/saleemmbayed-sketch/saleems-ai-factory) — the source catalog of agent personas, converter scripts, and the shared `tools.json` tool manifest.
 - [Tauri](https://tauri.app) — native app shell without the Electron footprint.
 - [Svelte](https://svelte.dev) — the frontend runtime.
 
