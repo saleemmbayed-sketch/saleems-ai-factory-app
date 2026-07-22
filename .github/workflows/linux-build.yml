@@ -1,16 +1,6 @@
-# Linux build — produces Agency Agents' .deb / .rpm / .AppImage bundles on a
-# native x86_64 runner (no emulation, so the AppImage bundler works cleanly).
+# Linux build — produces Saleem's AI Factory .deb / .rpm / .AppImage bundles.
 #
-# Tauri 2 builds all three Linux bundle targets via `npm run tauri build`
-# (which runs the SvelteKit frontend build first via beforeBuildCommand).
-#
-# Signing: Linux desktop has no code-signing requirement for v0.1.0 — AppImage
-# ships unsigned (the common convention); .deb/.rpm GPG signing is a future
-# optional step. Updater artifacts are disabled here (v0.1.0 ships with
-# SKIP_UPDATER; auto-update is deferred), so no signing key is needed.
-#
-# Output: .deb / .rpm / .AppImage uploaded to the workflow run. Cutting the
-# GitHub Release + attaching artifacts remains a deliberate human step.
+# Output: .deb / .rpm / .AppImage uploaded to the workflow run.
 
 name: Linux Build
 
@@ -22,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Build Linux bundles (.deb / .rpm / .AppImage)
+    name: Build Linux bundles
     # Pin to ubuntu-22.04 (Jammy, webkit2gtk-4.1) for the oldest glibc we
     # commit to supporting — binaries run on 22.04+; ubuntu-latest would
     # silently raise the floor.
@@ -110,20 +100,20 @@ jobs:
       - name: Upload .deb
         uses: actions/upload-artifact@v4
         with:
-          name: agency-agents-deb
+          name: saleems-ai-factory-deb
           path: src-tauri/target/release/bundle/deb/*.deb
           if-no-files-found: error
 
       - name: Upload .rpm
         uses: actions/upload-artifact@v4
         with:
-          name: agency-agents-rpm
+          name: saleems-ai-factory-rpm
           path: src-tauri/target/release/bundle/rpm/*.rpm
           if-no-files-found: error
 
       - name: Upload .AppImage
         uses: actions/upload-artifact@v4
         with:
-          name: agency-agents-appimage
+          name: saleems-ai-factory-appimage
           path: src-tauri/target/release/bundle/appimage/*.AppImage
           if-no-files-found: error
