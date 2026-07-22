@@ -37,11 +37,31 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
+      - name: Build frontend
+        shell: bash
+        run: npm run build 2>&1 | tee frontend-build.log
+        continue-on-error: true
+
       - name: Build installer
         shell: bash
-        run: npm run tauri build -- --config '{"bundle":{"createUpdaterArtifacts":false}}'
+        run: |
+          set -o pipefail
+          npm run tauri build -- --config '{"bundle":{"createUpdaterArtifacts":false}}' 2>&1 | tee build.log
+        continue-on-error: true
+
+      - name: Upload debug logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-debug-logs
+          path: |
+            frontend-build.log
+            build.log
+            src-tauri/target/**/bundle/nsis/*.exe
+            src-tauri/target/**/*.log
+          if-no-files-found: continue
 
       - name: Upload installer
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: saleems-ai-factory-windows
