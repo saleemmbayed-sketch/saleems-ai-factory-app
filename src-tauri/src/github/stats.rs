@@ -1,4 +1,4 @@
-﻿//! Anonymous (or token-authenticated) repo stats from
+//! Anonymous (or token-authenticated) repo stats from
 //! `api.github.com/repos/{owner}/{repo}` with a 24h disk cache.
 //!
 //! ## Caching

@@ -1,4 +1,4 @@
-﻿//! Corpus subsystem (Phase 1) — the maintained copy of the Saleem's AI Factory
+//! Corpus subsystem (Phase 1) — the maintained copy of the Saleem's AI Factory
 //! repo that the whole app reads from.
 //!
 //! ## Source of truth (systemPatterns.md §1)

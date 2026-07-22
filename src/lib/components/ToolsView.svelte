@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   /**
    * Tools — the "by tool" axis (the workspace is "by agent"), as a list/detail
    * two-pane mirroring the Agents workspace. The left pane lists each supported

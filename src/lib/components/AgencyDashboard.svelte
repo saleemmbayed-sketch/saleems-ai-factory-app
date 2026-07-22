@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   /**
    * Agency Dashboard — the at-a-glance overview. Four rollup stats, then the
    * charts: install-health donut, coverage-by-tool bars, the cross-tool coverage

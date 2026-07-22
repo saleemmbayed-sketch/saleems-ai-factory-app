@@ -1,4 +1,4 @@
-﻿//! GitHub OAuth Device Flow (RFC 8628) + macOS Keychain storage.
+//! GitHub OAuth Device Flow (RFC 8628) + macOS Keychain storage.
 //!
 //! This module implements every Phase 12e security gate listed in the
 //! parent `mod.rs` header. Read those first if you're new to this code.

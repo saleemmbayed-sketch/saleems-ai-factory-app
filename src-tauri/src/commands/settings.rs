@@ -1,4 +1,4 @@
-﻿//! Settings persistence (Phase 12d).
+//! Settings persistence (Phase 12d).
 //!
 //! Stores user-configurable preferences in
 //! `~/Library/Application Support/com.saleem.saleems-ai-factory-app/settings.json`. Loaded once

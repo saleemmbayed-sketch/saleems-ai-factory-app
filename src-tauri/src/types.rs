@@ -1,4 +1,4 @@
-﻿//! Shared DTOs serialized across the Tauri IPC boundary.
+//! Shared DTOs serialized across the Tauri IPC boundary.
 //!
 //! Every struct uses `#[serde(rename_all = "camelCase")]` so the
 //! TypeScript side matches `src/lib/types.ts` exactly.

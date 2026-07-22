@@ -1,4 +1,4 @@
-﻿{
+{
   "_note": "Division (category) label+icon+color metadata for the Saleem's AI Factory corpus. Mirrors the catalog repo's divisions.json (the canonical source; this is the bundled floor for first-run / pre-sync clones). Icons are Lucide PascalCase names; colors are hex. Read by src/corpus/mod.rs (load_division_meta / bundled_division_meta).",
   "categories": {
     "academic": { "label": "Academic", "icon": "GraduationCap", "color": "#8B5CF6" },

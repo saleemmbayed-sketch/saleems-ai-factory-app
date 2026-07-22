@@ -1,4 +1,4 @@
-﻿[package]
+[package]
 name = "saleems-ai-factory-app"
 version = "0.3.0"
 description = "Saleem's AI Factory — a native macOS app store for AI agents."

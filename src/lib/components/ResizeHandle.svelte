@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import { i18n } from "$lib/stores/i18n.svelte";
 
   /**

@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   /**
    * CatalogFirstRun.svelte — first-launch catalog-source picker (#1).
    *

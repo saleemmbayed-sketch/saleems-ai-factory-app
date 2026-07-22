@@ -1,4 +1,4 @@
-﻿//! Tauri-managed application state.
+//! Tauri-managed application state.
 //!
 //! Holds the agency subsystems:
 //! the corpus cache, persisted settings (the source of truth for the

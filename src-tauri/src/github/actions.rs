@@ -1,4 +1,4 @@
-﻿//! GitHub authed actions (Phase 12f).
+//! GitHub authed actions (Phase 12f).
 //!
 //! Star / unstar / is_starred / watch / unwatch / create_issue against
 //! `api.github.com`. Every function in this module:

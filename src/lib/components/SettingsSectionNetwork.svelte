@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   /**
    * SettingsSectionNetwork.svelte — Saleem's AI Factory
    *

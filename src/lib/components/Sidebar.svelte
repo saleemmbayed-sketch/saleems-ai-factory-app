@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import LayoutDashboard from "@lucide/svelte/icons/layout-dashboard";
   import Bot from "@lucide/svelte/icons/bot";
   import Wrench from "@lucide/svelte/icons/wrench";

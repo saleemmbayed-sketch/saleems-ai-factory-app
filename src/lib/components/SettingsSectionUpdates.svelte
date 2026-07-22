@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   /**
    * SettingsSectionUpdates.svelte — Phase 15
    *

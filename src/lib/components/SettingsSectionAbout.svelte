@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   /**
    * SettingsSectionAbout.svelte — Phase 12b
    *

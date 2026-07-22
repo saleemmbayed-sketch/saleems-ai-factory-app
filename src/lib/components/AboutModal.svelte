@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import { onMount } from "svelte";
   import X from "@lucide/svelte/icons/x";
   import Heart from "@lucide/svelte/icons/heart";
