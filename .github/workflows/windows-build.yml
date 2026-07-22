@@ -1,7 +1,5 @@
-# Windows build — produces Saleem's AI Factory NSIS installers for x64
+# Windows build — produces Saleem's AI Factory NSIS installer for x64
 # on a native windows-latest (x64) runner.
-#
-# Output: the x64 installer uploaded to the workflow run.
 
 name: Windows Build
 
@@ -37,31 +35,24 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Build frontend
-        shell: bash
-        run: npm run build 2>&1 | tee frontend-build.log
-        continue-on-error: true
+      - name: Build frontend (vite build)
+        run: npm run build
 
-      - name: Build installer
+      - name: Check Cargo.toml validity
         shell: bash
-        run: |
-          set -o pipefail
-          npm run tauri build -- --config '{"bundle":{"createUpdaterArtifacts":false}}' 2>&1 | tee build.log
-        continue-on-error: true
+        run: head -5 src-tauri/Cargo.toml
 
-      - name: Upload debug logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-debug-logs
-          path: |
-            frontend-build.log
-            build.log
-            src-tauri/target/**/bundle/nsis/*.exe
-            src-tauri/target/**/*.log
-          if-no-files-found: continue
+      - name: Verify Rust compiles (cargo check)
+        working-directory: src-tauri
+        run: cargo check
+
+      - name: Build Tauri app (+ bundle)
+        shell: bash
+        run: npm run tauri build -- --config '{"bundle":{"createUpdaterArtifacts":false}}'
+        env:
+          NODE_ENV: production
 
       - name: Upload installer
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: saleems-ai-factory-windows
